@@ -1,33 +1,28 @@
-def name_pet():
-    # asks the user if they would like to enter their own name or choose from a list
-    path = input("How would you like to name your pet? EITHER: write OR choose")
+# for testing the name pet function
+def list_items(list):
+    # sets the number the list begins with to 1
+    number = 1
 
-    if path == 'write':
-        # the user inputs their name for the pet.
-        pet_name = input("What would you like to name your pet?")
-        print(pet_name)
+    # uses the 'list' argument to assess what dictionary to take the items from to display.  (eg. if the argument given in the main routine was FOOD_DICTIONARY then the program lists the food.)
+    for item in list:
+        # displays the dictionary of items in an ordered list for the user to choose from. (formats the dictionary)
+        print("{}.  {}".format(number, item))
 
-    else:
-        print("1. John\n"
-              "2. Aimee\n"
-              "3. Olivia\n"
-              "4. George\n"
-              "5. Madelynn")
+        # makes the number increase as the list items increase
+        number += 1
 
-        pet_name = int(input("Choose from the list:"))
-        if pet_name == 1:
-            pet_name = "John"
-        if pet_name == 2:
-            pet_name = "Aimee"
-        if pet_name == 3:
-            pet_name = "Olivia"
-        if pet_name == 4:
-            pet_name = "George"
-        print(pet_name)
+
+# this is the function This component is based around
+def name_pet(path_list):
+
+    # create a list of the two options, either 'write your own name' or 'chose from a list of super fun names' (using the list_items function).
+    list_items(path_list)
+
 
 
 # Main Routine
+PATH = {"Write your own name": 1, "chose from a list of super fun names": 2}
 
-# calling the function fro testing
+# calling the function for testing
+name_pet(PATH)
 
-name_pet()
