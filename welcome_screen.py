@@ -15,5 +15,4 @@ def welcome_screen(pet_name):
           "  ^")
 
 # Main Routine
-
 welcome_screen("Rodney")
