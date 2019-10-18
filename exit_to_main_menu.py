@@ -29,13 +29,13 @@ def list_items(list_name):
 
 
 # this is the function this component is centred around
-def exit_to_main_menu(back_to_function, pet_name, list_name):
+def exit_to_main_menu(back_to_function, leave_function, pet_name, list_name):
     # asks the user if they would like to continue to the main menu
     leave = input("Would you like to return to the main menu? ENTER to exit, or PRESS ANY KEY to return to what you were just doing")
 
     # (using an if statement to move onto the function listing the main menu items (by entering) if the user chooses to move to the main menu [if leave  == ""]
     if leave == "":
-        list_items(list_name)
+        leave_function(list_name)
 
     # else, go back to [back_to function])
     else:
