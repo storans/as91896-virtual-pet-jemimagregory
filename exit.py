@@ -13,11 +13,11 @@ def exit_program():
 # setting alive to true to test if the function will change it to false
 alive = True
 
-#printing for testing purposes
+# printing for testing purposes
 print(alive)
 
 # calling the function to test it
 alive = exit_program()
 
-#printing for testing purposes
+# printing for testing purposes
 print(alive)
