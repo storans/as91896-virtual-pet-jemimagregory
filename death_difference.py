@@ -21,6 +21,9 @@ def death_screen(pet_weight, death, min_weight, max_weight, exit_program_functio
     else:
         difference = min_weight - pet_weight
 
+    # rounds the difference to 2 decimal places for clarity
+    difference = round(difference, 1)
+
     # tells the user why their pet died
     print("Your pet died because it was {}.".format(death))
 
