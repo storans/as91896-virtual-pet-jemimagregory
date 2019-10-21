@@ -1,6 +1,6 @@
-def check_if_dead(pet_weight, min, max):
+def check_if_dead(weight, min_weight, max_weight):
 
-    if pet_weight > max:
+    if weight > max_weight:
 
         # if the pet_weight exceeds the maximum weight, the death_end function runs.
         death_end()
@@ -11,7 +11,7 @@ def check_if_dead(pet_weight, min, max):
         # returns the death so it can be used outside the function (in the death_screen function)
         return death
 
-    elif pet_weight < min:
+    elif weight < min_weight:
 
         # if the pet_weight doesn't reach the minimum weight, the death_end function runs.
         death_end()
