@@ -3,10 +3,11 @@ def exit_program():
     print("Thank you for playing the Virtual Pet game! Goodbye!")
 
     # the 'alive' loop is broken, so the program ends
-    alive = False
+    life = False
 
     # returning the alive variable so it can end the program outside of this function.
-    return alive
+    return life
+
 
 # Main Routine
 

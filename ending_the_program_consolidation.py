@@ -1,16 +1,8 @@
-# this version has the basic aspects of the program
-def list_items(dictionary_name):
-    # sets the number the list begins with to 1
-    number = 1
+def dictionary_to_two_d_list(dictionary):
+    two_d_list = list(dictionary.items())
 
-    # uses the 'list' argument to assess what dictionary to take the items from to display.  (eg. if the argument given in the main routine was FOOD_DICTIONARY then the program lists the food.)
-    for item in dictionary_name:
-        # displays the dictionary of items in an ordered list for the user to choose from. (formats the dictionary)
-        print("{}.  {}".format(number, item))
-
-        # makes the number increase as the list items increase
-        number += 1
-
+    # returning the list created by the function so it can be used outside of this function
+    return two_d_list
 
 def choose_item(question, list_name):
     # asks the user for an input of which item (from the list which will always display above) they would like from the dictionary specified as an argument
@@ -28,95 +20,6 @@ def choose_item(question, list_name):
     # returning what the user chose so it can be assessed outside of the this function
     return choice
 
-
-def dictionary_to_two_d_list(dictionary):
-    two_d_list = list(dictionary.items())
-
-    # returning the list created by the function so it can be used outside of this function
-    return two_d_list
-
-
-def opening_screen():
-    print("Welcome to Virtual Pet Snake Game \n"
-          "Virtual Pets are great for proving to your parents that you are responsible enough to own a real pet. \n"
-          "To keep your virtual pet snake alive you will need to balance feeding the pet and exercising it, so it stays a good weight.")
-
-
-def name_pet(path_dictionary, path_list, names_dictionary, names_list):
-    # create a list of the two options, either 'write your own name' or 'chose from a list of super fun names' (using the list_items function).
-    list_items(path_dictionary)
-
-    # asks the user to choose from the list (which path they want to take), using the choose_item function.
-    choice = choose_item("Choose how you would like to name your pet: >>", path_list)
-
-    # if the user chooses the path of writing their own name
-    if choice == 0:
-
-        # asks the user to input their name for the pet.
-        name = input("What would you like to name your pet? >>")
-
-        # inform the user of what they wrote
-        print("You chose: {}, what a lovely name.".format(name))
-
-        # returns the name the user chooses so it can be used throughout the program.
-        return name
-
-    # if the user the chooses the path of picking a name from a list
-    else:
-        # prints a list of names using the list_item function
-        list_items(names_dictionary)
-
-        # uses the choose_item function to ask the user to choose from the list of names
-        name_index = choose_item("Which name would you like to pick?", names_list)
-        # print(name_index)
-        chosen_name = names_list[name_index][0]
-        # print(chosen_name)
-        return chosen_name
-
-
-# This function is used after the main explanation of how the program works
-def welcome_screen(name):
-    # displays an introduction of the pet rabbit to the user
-    print("This is your pet, {}!".format(name))
-    print("   _________         ________ \n"
-          "  /         \       /         \  \n"
-          " /  /~~~~~\  \     /  /~~~~~\  \ \n"
-          " |  |     |  |     |  |     |  | \n"
-          " |  |     |  |     |  |     |  | \n"
-          " |  |     |  |     |  |     |  |         / \n"
-          " |  |     |  |     |  |     |  |       // \n"
-          "(O  O)    \  \_____/  /     \  \_____/ / \n"
-          " \__/      \         /       \        / \n"
-          "  |         ~~~~~~~~~         ~~~~~~~~ \n"
-          "  ^")
-
-
-def choose_item(question, two_d_list):
-    # asks the user for an input of which item (from the list which will always display above) they would like from the dictionary specified as an argument
-    choice = int(input(question))
-
-    # subtracting 1 from the number the user inputted so it conforms to the way lists are numbered starting at 0 rather than 1.
-    choice -= 1
-
-    # displaying to the user what they chose by taking the number they picked and using it as the index to access the 2d list of foods.
-    print ("you chose: {}".format(two_d_list[choice][0]))
-
-    # returning what the user chose so it can be assessed outside of the this function
-    return choice
-
-
-def check_pet_weight(pet_weight, min_weight, max_weight):
-
-    # Displays the maximum and minimum weights the pet has to between
-    print("Your pet has to be between {}kg and {}kg to stay alive and happy.".format(min_weight, max_weight))
-
-    # Displays the pets current weight for the user.
-    print("Currently your pet weighs {}kg, so your pet is alive and happy!".format(pet_weight))
-
-
-# uses the pet_weight argument to add/subtract the weight from
-# uses the choice argument to know what to select from the list
-# uses the two_d_list argument to assess what list the function needs to find the amount of weight to add.
 def change_weight(weight, choice, two_d_list):
     # adds the weight linked to the option chosen (by accessing the list they came from)
     if choice == 0:
@@ -188,6 +91,10 @@ def death_screen(weight, death, min_weight, max_weight):
     # displays the difference so the user can see how much their pet was over/under weight
     print("At {}kgs, your pet was {}kgs {}.".format(weight, difference, death))
 
+    # pet_dead = exit_program()
+
+    # return pet_dead
+
 
 def exit_program():
     # the goodbye message is displayed to the user
@@ -230,11 +137,6 @@ max_weight = 2.5
 
 min_weight = 1.5
 
-opening_screen()
-
-pet_name = name_pet(PATH_DICTIONARY, PATH_LIST, NAMES_DICTIONARY, NAMES_LIST)
-
-welcome_screen(pet_name)
 
 # A variable set to True to check whether the program should continue running.
 alive = True
@@ -242,18 +144,14 @@ alive = True
 # Start an infinite loop to prompt for a correct option value
 while alive:
 
-    list_items(MAIN_MENU_ITEMS)
+    path= int(input("enter choice (1) >>"))
 
-    path = choose_item("What would you like to do?", MAIN_MENU_ITEMS)
-
-    if path == 0:
-        check_pet_weight(pet_weight, min_weight, max_weight)
-
-    elif path == 1:
-        list_items(FOOD_DICTIONARY)
+    if path == 1:
         choice = choose_item("What would you like to feed your pet?", FOOD_LIST)
         pet_weight = change_weight(pet_weight, choice, FOOD_LIST)
         life = check_if_dead(pet_weight, min_weight, max_weight)
         if life == "overweight" or life == "underweight":
             death_screen(pet_weight, life, min_weight, max_weight)
             alive = exit_program()
+    else:
+        print("error")

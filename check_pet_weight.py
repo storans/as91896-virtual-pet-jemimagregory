@@ -10,4 +10,4 @@ def check_pet_weight(pet_weight, min_weight, max_weight):
 # Main Routine
 
 # calling the function to test with general inputs
-check_pet_weight(2.3, 1.5, 2.5)
+check_pet_weight(2.9, 1.5, 2.5)
