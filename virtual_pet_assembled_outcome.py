@@ -257,3 +257,12 @@ while alive:
         if life == "overweight" or life == "underweight":
             death_screen(pet_weight, life, min_weight, max_weight)
             alive = exit_program()
+
+    elif path == 2:
+        list_items(EXERCISE_DICTIONARY)
+        choice = choose_item("How would you like to exercise your pet?", EXERCISE_LIST)
+        pet_weight = change_weight(pet_weight, choice, EXERCISE_LIST)
+        life = check_if_dead(pet_weight, min_weight, max_weight)
+        if life == "overweight" or life == "underweight":
+            death_screen(pet_weight, life, min_weight, max_weight)
+            alive = exit_program()
