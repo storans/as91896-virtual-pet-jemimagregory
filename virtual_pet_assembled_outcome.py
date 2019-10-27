@@ -1,4 +1,30 @@
-# this version has the basic aspects of the program
+# this version has the added aspect of the check int function so it should be more functional
+def check_int(question, low, high):  # using generalised arguments so I can use this function in lots of places
+    valid = False
+    error = "Please enter a NUMBER (integer) between {} and {}.".format(low, high)
+
+    # The try and except is ensuring the value can be converted to an integer. If it can, the infinite loop is broken so the program can continue
+    while not valid:
+        try:
+
+            # asks for the user's input, checks the input is an integer -for questions that have a numerical input from the user
+            number = int(input("{}".format(question)))
+
+            # checks that the user's input is between the lowest acceptable number and the highest acceptable number.
+            if low <= number <= high:
+
+                # returns the user's input if it meets all the criteria
+                return number
+
+            # if the user's input doesn't meet all the criteria then the error message is printed
+            else:
+                print(error)
+                print()
+
+        # the except branch of the try and except prints the error message if there is a value error.
+        except ValueError:
+            print(error)
+
 def list_items(dictionary_name):
     # sets the number the list begins with to 1
     number = 1
@@ -12,9 +38,9 @@ def list_items(dictionary_name):
         number += 1
 
 
-def choose_item(question, list_name):
+def choose_item(question, list_name, low, high):
     # asks the user for an input of which item (from the list which will always display above) they would like from the dictionary specified as an argument
-    choice = int(input(question))
+    choice = check_int(question, low, high)
 
     # subtracting 1 from the number the user inputted so it conforms to the way lists are numbered starting at 0 rather than 1.
     choice -= 1
@@ -42,15 +68,15 @@ def opening_screen():
           "To keep your virtual pet snake alive you will need to balance feeding the pet and exercising it, so it stays a good weight.")
 
 
-def name_pet(path_dictionary, path_list, names_dictionary, names_list):
+def name_pet(path_dictionary, path_list, names_dictionary, names_list, path_low, path_high, list_low, list_high):
     # create a list of the two options, either 'write your own name' or 'chose from a list of super fun names' (using the list_items function).
     list_items(path_dictionary)
 
     # asks the user to choose from the list (which path they want to take), using the choose_item function.
-    choice = choose_item("Choose how you would like to name your pet: >>", path_list)
+    user_choice = choose_item("Choose how you would like to name your pet: >>", path_list, path_low, path_high)
 
     # if the user chooses the path of writing their own name
-    if choice == 0:
+    if user_choice == 0:
 
         # asks the user to input their name for the pet.
         name = input("What would you like to name your pet? >>")
@@ -67,7 +93,7 @@ def name_pet(path_dictionary, path_list, names_dictionary, names_list):
         list_items(names_dictionary)
 
         # uses the choose_item function to ask the user to choose from the list of names
-        name_index = choose_item("Which name would you like to pick?", names_list)
+        name_index = choose_item("Which name would you like to pick?", names_list, list_low, list_high)
         # print(name_index)
         chosen_name = names_list[name_index][0]
         # print(chosen_name)
@@ -91,9 +117,9 @@ def welcome_screen(name):
           "  ^")
 
 
-def choose_item(question, two_d_list):
+def choose_item(question, two_d_list, int_low, int_high):
     # asks the user for an input of which item (from the list which will always display above) they would like from the dictionary specified as an argument
-    choice = int(input(question))
+    choice = check_int(question, int_low, int_high)
 
     # subtracting 1 from the number the user inputted so it conforms to the way lists are numbered starting at 0 rather than 1.
     choice -= 1
@@ -242,7 +268,7 @@ min_weight = 1.5
 
 opening_screen()
 
-pet_name = name_pet(PATH_DICTIONARY, PATH_LIST, NAMES_DICTIONARY, NAMES_LIST)
+pet_name = name_pet(PATH_DICTIONARY, PATH_LIST, NAMES_DICTIONARY, NAMES_LIST, 1, 2, 1, 13)
 
 welcome_screen(pet_name)
 
@@ -254,14 +280,14 @@ while alive:
 
     list_items(MAIN_MENU_ITEMS)
 
-    path = choose_item("What would you like to do?", MAIN_MENU_ITEMS)
+    path = choose_item("What would you like to do?", MAIN_MENU_ITEMS, 1, 5)
 
     if path == 0:
         check_pet_weight(pet_weight, min_weight, max_weight)
 
     elif path == 1:
         list_items(FOOD_DICTIONARY)
-        choice = choose_item("What would you like to feed your pet?", FOOD_LIST)
+        choice = choose_item("What would you like to feed your pet?", FOOD_LIST, 1, 3)
         pet_weight = change_weight(pet_weight, choice, FOOD_LIST)
         life = check_if_dead(pet_weight, min_weight, max_weight)
         if life == "overweight" or life == "underweight":
@@ -270,7 +296,7 @@ while alive:
 
     elif path == 2:
         list_items(EXERCISE_DICTIONARY)
-        choice = choose_item("How would you like to exercise your pet?", EXERCISE_LIST)
+        choice = choose_item("How would you like to exercise your pet?", EXERCISE_LIST, 1, 3)
         pet_weight = change_weight(pet_weight, choice, EXERCISE_LIST)
         life = check_if_dead(pet_weight, min_weight, max_weight)
         if life == "overweight" or life == "underweight":
