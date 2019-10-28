@@ -131,32 +131,32 @@ def choose_item(question, two_d_list, int_low, int_high):
     return pick
 
 
-def check_pet_weight(pet_weight, min_weight, max_weight):
+def check_pet_weight(weight, minimum, maximum):
 
     # Displays the maximum and minimum weights the pet has to between
-    print("Your pet has to be between {}kg and {}kg to stay alive and happy.".format(min_weight, max_weight))
+    print("Your pet has to be between {}kg and {}kg to stay alive and happy.".format(minimum, maximum))
 
     # Displays the pets current weight for the user.
-    print("Currently your pet weighs {}kg, so your pet is alive and happy!".format(pet_weight))
+    print("Currently your pet weighs {}kg, so your pet is alive and happy!".format(weight))
 
 
 # uses the pet_weight argument to add/subtract the weight from
-# uses the choice argument to know what to select from the list
+# uses the pick argument to know what to select from the list
 # uses the two_d_list argument to assess what list the function needs to find the amount of weight to add.
-def change_weight(weight, choice, two_d_list):
+def change_weight(weight, pick, two_d_list):
+
     # adds the weight linked to the option chosen (by accessing the list they came from)
-    if choice == 0:
+    if pick == 0:
         weight += two_d_list[0][1]
 
-    elif choice == 1:
+    elif pick == 1:
         weight += two_d_list[1][1]
-        # weight += 1
 
     else:
         weight += two_d_list[2][1]
 
     # displays the weight of the pet after the weight was added
-    print("your pet weights: {}kg".format(pet_weight))
+    print("your pet weights: {}kg".format(weight))
 
     # returns the pet's weight so it can be accessed later, outside of the function.
     return weight
@@ -195,15 +195,15 @@ def check_if_dead(weight, minimum, maximum):
 
 
 # calls 'death' as an argument so the function knows how the equation for the difference needs to be ordered (death is usually assigned in the check_if_dead function)
-def death_screen(weight, death, min_weight, max_weight):
+def death_screen(weight, death, minimum, maximum):
     # if death is 'overweight' then the order for the equation is pet's weight minus the maximum weight
     if death == "overweight":
         # calculates the difference between the pet's weight and the maximum weight
-        difference = weight - max_weight
+        difference = weight - maximum
 
     # if death is 'underweight' then the order for the equation is the maximum weight minus the pet's weight
     else:
-        difference = min_weight - weight
+        difference = minimum - weight
 
     # rounds the difference to 2 decimal places for clarity
     difference = round(difference, 1)
@@ -262,6 +262,7 @@ PATH_LIST = dictionary_to_two_d_list(PATH_DICTIONARY)
 
 MAIN_MENU_ITEMS_LIST = dictionary_to_two_d_list(MAIN_MENU_ITEMS_DICTIONARY)
 
+
 pet_weight = 2
 
 max_weight = 2.5
@@ -269,6 +270,7 @@ max_weight = 2.5
 min_weight = 1.5
 
 opening_screen()
+
 
 pet_name = name_pet(PATH_DICTIONARY, PATH_LIST, NAMES_DICTIONARY, NAMES_LIST, 1, 2, 1, 13)
 
