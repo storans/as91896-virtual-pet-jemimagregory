@@ -119,16 +119,16 @@ def welcome_screen(name):
 
 def choose_item(question, two_d_list, int_low, int_high):
     # asks the user for an input of which item (from the list which will always display above) they would like from the dictionary specified as an argument
-    choice = check_int(question, int_low, int_high)
+    pick = check_int(question, int_low, int_high)
 
     # subtracting 1 from the number the user inputted so it conforms to the way lists are numbered starting at 0 rather than 1.
-    choice -= 1
+    pick -= 1
 
     # displaying to the user what they chose by taking the number they picked and using it as the index to access the 2d list of foods.
-    print ("you chose: {}".format(two_d_list[choice][0]))
+    print("you chose: {}".format(two_d_list[pick][0]))
 
     # returning what the user chose so it can be assessed outside of the this function
-    return choice
+    return pick
 
 
 def check_pet_weight(pet_weight, min_weight, max_weight):
@@ -162,9 +162,9 @@ def change_weight(weight, choice, two_d_list):
     return weight
 
 
-def check_if_dead(weight, min_weight, max_weight):
+def check_if_dead(weight, minimum, maximum):
 
-    if weight > max_weight:
+    if weight > maximum:
 
         # if the pet_weight exceeds the maximum weight, assigns death to 'overweight'
         death_type = "overweight"
@@ -176,7 +176,7 @@ def check_if_dead(weight, min_weight, max_weight):
         # if the pet_weight exceeds the maximum weight, the death_screen function runs.
         # death_screen(weight, death_type, min_weight, max_weight)
 
-    elif weight < min_weight:
+    elif weight < minimum:
 
         # if the pet_weight doesn't reach the minimum weight, assigns death to 'underweight'
         death_type = "underweight"
@@ -249,7 +249,8 @@ EXERCISE_DICTIONARY = {"walking": -0.1, "running": -0.2, "hopping": -0.4}
 
 PATH_DICTIONARY = {"Write your own name": 1, "chose from a list of super fun names": 2}
 
-MAIN_MENU_ITEMS = ["Check Pet's Weight", "Feed Pet", "Exercise Pet", "See Help Information", "Exit Game"]
+MAIN_MENU_ITEMS_DICTIONARY = {"Check Pet's Weight": 1, "Feed Pet": 2, "Exercise Pet": 3, "See Help Information": 4, "Exit Game": 5}
+
 
 FOOD_LIST = dictionary_to_two_d_list(FOOD_DICTIONARY)
 
@@ -259,6 +260,7 @@ NAMES_LIST = dictionary_to_two_d_list(NAMES_DICTIONARY)
 
 PATH_LIST = dictionary_to_two_d_list(PATH_DICTIONARY)
 
+MAIN_MENU_ITEMS_LIST = dictionary_to_two_d_list(MAIN_MENU_ITEMS_DICTIONARY)
 
 pet_weight = 2
 
@@ -278,9 +280,9 @@ alive = True
 # Start an infinite loop to prompt for a correct option value
 while alive:
 
-    list_items(MAIN_MENU_ITEMS)
+    list_items(MAIN_MENU_ITEMS_DICTIONARY)
 
-    path = choose_item("What would you like to do?", MAIN_MENU_ITEMS, 1, 5)
+    path = choose_item("What would you like to do?", MAIN_MENU_ITEMS_LIST, 1, 5)
 
     if path == 0:
         check_pet_weight(pet_weight, min_weight, max_weight)
