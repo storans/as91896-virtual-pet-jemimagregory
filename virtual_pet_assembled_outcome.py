@@ -1,7 +1,7 @@
 # using generalised arguments so I can use this function in lots of places
 def check_int(question, low, high):
     valid = False
-    error = "Please enter a NUMBER (integer) between {} and {}."\
+    error = "Please enter an integer (whole number) between {} and {} -the number from the list above."\
         .format(low, high)
 
     # The try and except is ensuring the value can be converted to an integer.
@@ -48,7 +48,9 @@ def list_items(dictionary_name):
         number += 1
 
 
-def choose_item(question, list_name, low, high):
+def choose_item(message, list_name, low, high):
+    question = message, "input the number of the option you want to choose."
+    print(question)
     # asks the user for an input of which item
     # (from the list which will always display above)
     # they would like from the dictionary specified as an argument
