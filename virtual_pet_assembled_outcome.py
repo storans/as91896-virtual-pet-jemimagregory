@@ -1,9 +1,11 @@
 import time
 
+
 # using generalised arguments so I can use this function in lots of places
 def check_int(question, low, high):
     valid = False
-    error = "Please enter an integer (whole number) between {} and {} -the number from the list above." \
+    error = "Please enter an integer (whole number) between {} and {} -the" \
+            " number from the list above." \
         .format(low, high)
 
     # The try and except is ensuring the value can be converted to an integer.
@@ -113,8 +115,8 @@ def name_pet(path_dictionary, path_list, names_dictionary, names_list,
 
     # if the user chooses the path of writing their own name
     if user_choice == 0:
-
-        # asks the user to input their name for the pet. -using the .title to capitalise the name the user writes.
+        # asks the user to input their name for the pet. -using the .title
+        # to capitalise the name the user writes.
         name = input("What would you like to name your pet? >>").title()
 
         # inform the user of what they wrote
@@ -240,11 +242,13 @@ def check_if_dead(weight, minimum, maximum):
         # it's also used outside the function (in the death_screen function)
         return death_type
 
-        # this has been moved to the main routine
-        # if the pet_weight exceeds the maximum weight,
-        # the death_screen function runs.
-        # death_screen(weight, death_type, min_weight, max_weight)
+    elif weight == 1.5 or weight == 2.5:
+        death_type = "close"
+        return death_type
 
+    # if the pet_weight exceeds the maximum weight,
+    # the death_screen function runs.
+    # death_screen(weight, death_type, min_weight, max_weight)
     # if the pet is still within the minimum and maximum weights
     # the function ends
     else:
@@ -319,7 +323,8 @@ def exit_program():
 def help_information(minimum, maximum):
     # displays the information
     # to help the user understand how the program works.
-    print("This game about your pet is super fun when you know how it works!\n"
+    print("This game about your pet is super fun when you know how it works!"
+          "\n"
           "How your virtual pet works:\n"
           "1. Your pet has to stay healthy by being a good weight "
           "(between {}kg and {}kg)\n"
@@ -359,10 +364,11 @@ NAMES_DICTIONARY = {"Leaf": 1, "Noodles": 2, "Nofeet": 3, "Pretzel": 4,
                     "Worm": 9, "Zippy": 10, "Fluffy": 11,
                     "Monty the Python": 12, "William Snakespeare": 13}
 
-FOOD_DICTIONARY = {"spiders": 0.1, "rat": 0.2, "chicken": 0.3, "small dog": 0.4, "rabbit": 0.3, "bird": 0.2,
-                   "fish": 0.1}
+FOOD_DICTIONARY = {"spiders": 0.1, "rat": 0.2, "chicken": 0.3,
+                   "small dog": 0.4, "rabbit": 0.3, "bird": 0.2, "fish": 0.1}
 
-EXERCISE_DICTIONARY = {"slither": -0.1, "slip around": -0.2, "climb a tree": -0.3, "swim": -0.3, "chase prey": -0.4}
+EXERCISE_DICTIONARY = {"slither": -0.1, "slip around": -0.2,
+                       "climb a tree": -0.3, "swim": -0.3, "chase prey": -0.4}
 
 PATH_DICTIONARY = {"Write your own name": 1, "Chose from a list of super fun "
                                              "names": 2}
@@ -412,7 +418,8 @@ while alive:
                        1, 5)
 
     if path == 0:
-        # giving the component a header so the user can easily see what's going on
+        # giving the component a header so the user can easily see what's
+        # going on
         header = "Check {}'s Weight".format(pet_name)
         header_character = "-"
         format_header(header_character, header)
@@ -421,7 +428,8 @@ while alive:
         time.sleep(3)
 
     elif path == 1:
-        # giving the component a header so the user can easily see what's going on
+        # giving the component a header so the user can easily see what's
+        # going on
         header = "Feed {}".format(pet_name)
         header_character = "-"
         format_header(header_character, header)
@@ -435,9 +443,13 @@ while alive:
         if life == "overweight" or life == "underweight":
             death_screen(pet_weight, life, min_weight, max_weight)
             alive = exit_program()
+        elif life == "close":
+            print("{} is very close to being overweight, and dying. "
+                  "You should exercise them very soon.".format(pet_name))
 
     elif path == 2:
-        # giving the component a header so the user can easily see what's going on
+        # giving the component a header so the user can easily see what's
+        # going on
         header = "Exercise {}".format(pet_name)
         header_character = "-"
         format_header(header_character, header)
@@ -451,9 +463,13 @@ while alive:
         if life == "overweight" or life == "underweight":
             death_screen(pet_weight, life, min_weight, max_weight)
             alive = exit_program()
+        elif life == "close":
+            print("{} is very close to being underweight, and dying. "
+                  "You should feed them very soon.".format(pet_name))
 
     elif path == 3:
-        # giving the component a header so the user can easily see what's going on
+        # giving the component a header so the user can easily see what's
+        # going on
         header = "Help Information"
         header_character = "-"
         format_header(header_character, header)
@@ -462,7 +478,8 @@ while alive:
         time.sleep(3)
 
     else:
-        # giving the component a header so the user can easily see what's going on
+        # giving the component a header so the user can easily see what's
+        # going on
         header = "Exit Game"
         header_character = "-"
         format_header(header_character, header)
