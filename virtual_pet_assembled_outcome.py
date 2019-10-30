@@ -4,7 +4,7 @@ import time
 # using generalised arguments so I can use this function in lots of places
 def check_int(question, low, high):
     valid = False
-    error = "Please enter an integer (whole number) between {} and {} -the" \
+    error = "Please enter an number (whole number) between {} and {} -a" \
             " number from the list above." \
         .format(low, high)
 
@@ -15,7 +15,7 @@ def check_int(question, low, high):
 
             # asks for the user's input, checks the input is an integer
             # for questions that have a numerical input from the user
-            number = int(input("{}".format(question)))
+            number = int(input("{} >> ".format(question)))
             # checks that the user's input is between the lowest acceptable
             # number and the highest acceptable number.
             if low <= number <= high:
@@ -88,9 +88,9 @@ def dictionary_to_two_d_list(dictionary):
 
 def opening_screen():
     # giving the component a header so the user can easily see what's going on
-    header = "Welcome to Virtual Pet Snake Game"
-    header_character = "*"
-    format_header(header_character, header)
+    header_ = "Welcome to Virtual Pet Snake Game"
+    header_character_ = "*"
+    format_header(header_character_, header_)
     print("Virtual Pets are great for proving to your parents that you are "
           "responsible enough to own a real pet. \n"
           "To keep your virtual pet snake alive you will need to balance "
@@ -110,14 +110,14 @@ def name_pet(path_dictionary, path_list, names_dictionary, names_list,
     list_items(path_dictionary)
     # asks the user to choose from the list (which path they want to take)
     # using the choose_item function.
-    user_choice = choose_item("How would you like to name your pet? "
-                              ">>", path_list, path_low, path_high)
+    user_choice = choose_item("How would you like to name your pet? ",
+                              path_list, path_low, path_high)
 
     # if the user chooses the path of writing their own name
     if user_choice == 0:
         # asks the user to input their name for the pet. -using the .title
         # to capitalise the name the user writes.
-        name = input("What would you like to name your pet? >>").title()
+        name = input("What would you like to name your pet? >> ").title()
 
         # inform the user of what they wrote
         print("You chose: {}, what a lovely name.".format(name))
@@ -207,7 +207,7 @@ def change_weight(weight, pick, two_d_list):
     weight = round(weight, 2)
 
     # displays the weight of the pet after the weight was added
-    print("Your pet weighs: {}kg".format(weight))
+    print("Your pet now weighs: {}kg".format(weight))
 
     # returns the pet's weight so it can be accessed later,
     # outside of the function.
@@ -330,6 +330,13 @@ def help_information(minimum, maximum):
           "(between {}kg and {}kg)\n"
           "2. You need to feed and exercise your pet so it stays a healthy"
           " weight.".format(minimum, maximum))
+    print()
+    print("It is important to not spend too much time looking at screens be"
+          "cause looking at screens for too long can cause health problems\n"
+          "It is recommended that you spend a maximum of 2 hours looking"
+          " at a screen each day.\n"
+          "Enjoy playing this game, but don't play"
+          " for too long!")
 
 
 def format_header(character, output):
