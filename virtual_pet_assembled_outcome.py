@@ -1,3 +1,10 @@
+# Virtual Pet Snake Game
+# Purpose = To teach a user to care for a pet snake,
+# without the mess and responsibility of a real snake.
+# Intended user = A 10 year old child
+# Version = Final
+
+
 import time
 
 
@@ -36,6 +43,7 @@ def check_int(question, low, high):
 
 
 def list_items(dictionary_name):
+
     # sets the number the list begins with to 1
     number = 1
 
@@ -115,9 +123,15 @@ def name_pet(path_dictionary, path_list, names_dictionary, names_list,
 
     # if the user chooses the path of writing their own name
     if user_choice == 0:
-        # asks the user to input their name for the pet. -using the .title
-        # to capitalise the name the user writes.
-        name = input("What would you like to name your pet? >> ").title()
+        name = ""
+        while name == "":
+            # asks the user to enter a name
+            name = user_name_pet()
+
+            if name == "":
+                print()
+                print("Please enter a name.")
+                print()
 
         # inform the user of what they wrote
         print("You chose: {}, what a lovely name.".format(name))
@@ -139,6 +153,13 @@ def name_pet(path_dictionary, path_list, names_dictionary, names_list,
         chosen_name = names_list[name_index][0]
         # print(chosen_name)
         return chosen_name
+
+
+def user_name_pet():
+    # asks the user to input their name for the pet. -using the .title
+    # to capitalise the name the user writes.
+    name = input("What would you like to name your pet? >> ").title().strip()
+    return name
 
 
 # This function is used after the main explanation of how the program works
@@ -224,7 +245,6 @@ def check_if_dead(weight, minimum, maximum):
         # returns the death so it can be used to identify that the pet is dead
         # and that the program needs to end
         # it's also used outside the function (in the death_screen function)
-        return death_type
 
         # this has been moved to the main routine
         # if the pet_weight exceeds the maximum weight,
@@ -240,11 +260,9 @@ def check_if_dead(weight, minimum, maximum):
         # returns the death so it can be used to identify that
         # the pet is dead and that the program needs to end,
         # it's also used outside the function (in the death_screen function)
-        return death_type
 
     elif weight == 1.5 or weight == 2.5:
         death_type = "close"
-        return death_type
 
     # if the pet_weight exceeds the maximum weight,
     # the death_screen function runs.
@@ -253,7 +271,8 @@ def check_if_dead(weight, minimum, maximum):
     # the function ends
     else:
         death_type = "alive"
-        return death_type
+
+    return death_type
 
 
 # calls 'death' as an argument
@@ -364,131 +383,136 @@ def goodbye_snake():
 
 
 # Main Routine
+if __name__ == "__main__":
 
-# Setting dictionaries/lists
-NAMES_DICTIONARY = {"Leaf": 1, "Noodles": 2, "Nofeet": 3, "Pretzel": 4,
-                    "Slip": 5, "Slinky": 6, "Slithers": 7, "Sunshine": 8,
-                    "Worm": 9, "Zippy": 10, "Fluffy": 11,
-                    "Monty the Python": 12, "William Snakespeare": 13}
+    # Setting dictionaries/lists
+    NAMES_DICTIONARY = {"Leaf": 1, "Noodles": 2, "Nofeet": 3, "Pretzel": 4,
+                        "Slip": 5, "Slinky": 6, "Slithers": 7, "Sunshine": 8,
+                        "Worm": 9, "Zippy": 10, "Fluffy": 11,
+                        "Monty the Python": 12, "William Snakespeare": 13}
 
-FOOD_DICTIONARY = {"spiders": 0.1, "rat": 0.2, "chicken": 0.3,
-                   "small dog": 0.4, "rabbit": 0.3, "bird": 0.2, "fish": 0.1}
+    FOOD_DICTIONARY = {"spiders": 0.1, "rat": 0.2, "chicken": 0.3,
+                       "small dog": 0.4, "rabbit": 0.3, "bird": 0.2,
+                       "fish": 0.1}
 
-EXERCISE_DICTIONARY = {"slither": -0.1, "slip around": -0.2,
-                       "climb a tree": -0.3, "swim": -0.3, "chase prey": -0.4}
+    EXERCISE_DICTIONARY = {"slither": -0.1, "slip around": -0.2,
+                           "climb a tree": -0.3, "swim": -0.3,
+                           "chase prey": -0.4}
 
-PATH_DICTIONARY = {"Write your own name": 1, "Chose from a list of super fun "
-                                             "names": 2}
+    PATH_DICTIONARY = {"Write your own name": 1, "Chose from a list of "
+                                                 "super fun names": 2}
 
-MAIN_MENU_ITEMS_DICTIONARY = {"Check Pet's Weight": 1, "Feed Pet": 2,
-                              "Exercise Pet": 3, "See Help Information": 4,
-                              "Exit Game": 5}
+    MAIN_MENU_ITEMS_DICTIONARY = {"Check Pet's Weight": 1, "Feed Pet": 2,
+                                  "Exercise Pet": 3,
+                                  "See Help Information": 4, "Exit Game": 5}
 
-FOOD_LIST = dictionary_to_two_d_list(FOOD_DICTIONARY)
+    FOOD_LIST = dictionary_to_two_d_list(FOOD_DICTIONARY)
 
-EXERCISE_LIST = dictionary_to_two_d_list(EXERCISE_DICTIONARY)
+    EXERCISE_LIST = dictionary_to_two_d_list(EXERCISE_DICTIONARY)
 
-NAMES_LIST = dictionary_to_two_d_list(NAMES_DICTIONARY)
+    NAMES_LIST = dictionary_to_two_d_list(NAMES_DICTIONARY)
 
-PATH_LIST = dictionary_to_two_d_list(PATH_DICTIONARY)
+    PATH_LIST = dictionary_to_two_d_list(PATH_DICTIONARY)
 
-MAIN_MENU_ITEMS_LIST = dictionary_to_two_d_list(MAIN_MENU_ITEMS_DICTIONARY)
+    MAIN_MENU_ITEMS_LIST = dictionary_to_two_d_list(MAIN_MENU_ITEMS_DICTIONARY)
 
-pet_weight = 2
+    pet_weight = 2
 
-max_weight = 2.5
+    max_weight = 2.5
 
-min_weight = 1.5
+    min_weight = 1.5
 
-opening_screen()
+    opening_screen()
 
-pet_name = name_pet(PATH_DICTIONARY, PATH_LIST, NAMES_DICTIONARY, NAMES_LIST,
-                    1, 2, 1, 13)
+    pet_name = name_pet(PATH_DICTIONARY, PATH_LIST, NAMES_DICTIONARY,
+                        NAMES_LIST, 1, 2, 1, 13)
 
-welcome_screen(pet_name)
-# adds a pause after the pet is named
-time.sleep(3)
+    welcome_screen(pet_name)
+    # adds a pause after the pet is named
+    time.sleep(3)
 
-# A variable set to True to check whether the program should continue running.
-alive = True
+    # A variable set to True to check whether
+    # the program should continue running.
+    alive = True
 
-# Start an infinite loop to prompt for a correct option value
-while alive:
+    # Start an infinite loop to prompt for a correct option value
+    while alive:
 
-    # giving the component a header so the user can easily see what's going on
-    header = "Main Menu"
-    header_character = "="
-    format_header(header_character, header)
-    list_items(MAIN_MENU_ITEMS_DICTIONARY)
-
-    path = choose_item("What would you like to do?", MAIN_MENU_ITEMS_LIST,
-                       1, 5)
-
-    if path == 0:
-        # giving the component a header so the user can easily see what's
-        # going on
-        header = "Check {}'s Weight".format(pet_name)
-        header_character = "-"
+        # giving the component a header
+        # so the user can easily see what's going on
+        header = "Main Menu"
+        header_character = "="
         format_header(header_character, header)
-        check_pet_weight(pet_weight, min_weight, max_weight)
-        # adds a pause after the pet's weight is displayed
-        time.sleep(3)
+        list_items(MAIN_MENU_ITEMS_DICTIONARY)
 
-    elif path == 1:
-        # giving the component a header so the user can easily see what's
-        # going on
-        header = "Feed {}".format(pet_name)
-        header_character = "-"
-        format_header(header_character, header)
-        list_items(FOOD_DICTIONARY)
-        choice = choose_item("What would you like to feed your pet?",
-                             FOOD_LIST, 1, 7)
-        pet_weight = change_weight(pet_weight, choice, FOOD_LIST)
-        # adds a pause after the pet is fed
-        time.sleep(3)
-        life = check_if_dead(pet_weight, min_weight, max_weight)
-        if life == "overweight" or life == "underweight":
-            death_screen(pet_weight, life, min_weight, max_weight)
+        path = choose_item("What would you like to do?", MAIN_MENU_ITEMS_LIST,
+                           1, 5)
+
+        if path == 0:
+            # giving the component a header so the user can easily see what's
+            # going on
+            header = "Check {}'s Weight".format(pet_name)
+            header_character = "-"
+            format_header(header_character, header)
+            check_pet_weight(pet_weight, min_weight, max_weight)
+            # adds a pause after the pet's weight is displayed
+            time.sleep(3)
+
+        elif path == 1:
+            # giving the component a header so the user can easily see what's
+            # going on
+            header = "Feed {}".format(pet_name)
+            header_character = "-"
+            format_header(header_character, header)
+            list_items(FOOD_DICTIONARY)
+            choice = choose_item("What would you like to feed your pet?",
+                                 FOOD_LIST, 1, 7)
+            pet_weight = change_weight(pet_weight, choice, FOOD_LIST)
+            # adds a pause after the pet is fed
+            time.sleep(3)
+            life = check_if_dead(pet_weight, min_weight, max_weight)
+            if life == "overweight" or life == "underweight":
+                death_screen(pet_weight, life, min_weight, max_weight)
+                alive = exit_program()
+            elif life == "close":
+                print("{} is very close to being overweight, and dying. "
+                      "You should exercise them very soon.".format(pet_name))
+
+        elif path == 2:
+            # giving the component a header so the user can easily see what's
+            # going on
+            header = "Exercise {}".format(pet_name)
+            header_character = "-"
+            format_header(header_character, header)
+            list_items(EXERCISE_DICTIONARY)
+            choice = choose_item("How would you like to exercise your pet?",
+                                 EXERCISE_LIST, 1, 5)
+            pet_weight = change_weight(pet_weight, choice, EXERCISE_LIST)
+            # adds a pause after the pet is exercised
+            time.sleep(3)
+            life = check_if_dead(pet_weight, min_weight, max_weight)
+            if life == "overweight" or life == "underweight":
+                death_screen(pet_weight, life, min_weight, max_weight)
+                alive = exit_program()
+            elif life == "close":
+                print("{} is very close to being underweight, and dying. "
+                      "You should feed them very soon.".format(pet_name))
+
+        elif path == 3:
+            # giving the component a header so the user can easily see what's
+            # going on
+            header = "Help Information"
+            header_character = "-"
+            format_header(header_character, header)
+            help_information(min_weight, max_weight)
+            # adds a pause after the help information is displayed
+            time.sleep(3)
+
+        else:
+            # giving the component a header so the user can easily see what's
+            # going on
+            header = "Exit Game"
+            header_character = "-"
+            format_header(header_character, header)
+            goodbye_snake()
             alive = exit_program()
-        elif life == "close":
-            print("{} is very close to being overweight, and dying. "
-                  "You should exercise them very soon.".format(pet_name))
-
-    elif path == 2:
-        # giving the component a header so the user can easily see what's
-        # going on
-        header = "Exercise {}".format(pet_name)
-        header_character = "-"
-        format_header(header_character, header)
-        list_items(EXERCISE_DICTIONARY)
-        choice = choose_item("How would you like to exercise your pet?",
-                             EXERCISE_LIST, 1, 5)
-        pet_weight = change_weight(pet_weight, choice, EXERCISE_LIST)
-        # adds a pause after the pet is exercised
-        time.sleep(3)
-        life = check_if_dead(pet_weight, min_weight, max_weight)
-        if life == "overweight" or life == "underweight":
-            death_screen(pet_weight, life, min_weight, max_weight)
-            alive = exit_program()
-        elif life == "close":
-            print("{} is very close to being underweight, and dying. "
-                  "You should feed them very soon.".format(pet_name))
-
-    elif path == 3:
-        # giving the component a header so the user can easily see what's
-        # going on
-        header = "Help Information"
-        header_character = "-"
-        format_header(header_character, header)
-        help_information(min_weight, max_weight)
-        # adds a pause after the help information is displayed
-        time.sleep(3)
-
-    else:
-        # giving the component a header so the user can easily see what's
-        # going on
-        header = "Exit Game"
-        header_character = "-"
-        format_header(header_character, header)
-        goodbye_snake()
-        alive = exit_program()
